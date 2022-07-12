@@ -1,0 +1,34 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(rgb(0, 0, 0), rgb(37, 36, 50));
+    overflow: hidden;
+}
+canvas {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+  }
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: row;
+  }
+button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px;
+    margin-left:20px;
+    margin-right:20px;
+    word-spacing: normal;
+    letter-spacing: 5px;
+    border: 1px solid white;
+    color: white;
+    background: black;
+    cursor: pointer;
+  }

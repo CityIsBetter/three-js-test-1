@@ -1,6 +1,4 @@
-
-
-let scene, camera, renderer, star;
+let scene, camera, renderer;
 
 let mouseX = 0;
 let mouseY = 0;
@@ -20,23 +18,30 @@ function init(){
 
     const ambientLight = new THREE.AmbientLight(0xffffff);
 
-    scene.add( ambientLight )
+    scene.add( ambientLight );
 
-
-    function addStar(){
-        const geometry = new THREE.SphereGeometry( 0.25, 24, 24);
-        const material = new THREE.MeshStandardMaterial( { color: 0xffffff } );
-        star = new THREE.Mesh( geometry, material );
-    
-        const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
-        
-        star.position.set(x, y, z);
-        scene.add(star);
+    starGeo = new THREE.Geometry();
+    for (let i=0; i<=6000; i++){
+        star = new THREE.Vector3(
+            Math.random() * 600 -300,
+            Math.random() * 600 -300,
+            Math.random() * 600 -300
+        );
+        starGeo.vertices.push(star);
     }
-    
-    Array(300).fill().forEach(addStar);
-    
+    let sprite = new THREE.TextureLoader().load('star.png');
+    let starMaterial = new THREE.PointsMaterial({
+        color: 0xaaaaaa,
+        size: 0.7,
+        map: sprite
+    });
+
+    stars = new THREE.Points(starGeo, starMaterial);
+    scene.add(stars);
 }
+
+
+
 function onDocumentMouseMove( event ) {
 
     mouseX = ( event.clientX - (window.innerWidth/2) ) / 100;
@@ -52,8 +57,6 @@ function animate() {
 	camera.position.y += ( - mouseY - camera.position.y ) * .05;
     camera.lookAt( scene.position );
 	renderer.render( scene, camera );
-
-    render();
 }
 
 
